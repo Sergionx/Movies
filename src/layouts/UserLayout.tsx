@@ -2,7 +2,7 @@ import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import AuthProvider from "../contexts/AuthProvider";
 import { useAuth } from "../hooks/useAuth";
-import Header from "../components/navigation/LandingHeader";
+import LandingHeader from "../components/navigation/LandingHeader";
 
 function UserLayout() {
     const { user, loading } = useAuth();
@@ -20,14 +20,12 @@ function UserLayout() {
 
     return (
         <>
-            <AuthProvider>
-                <div>
-                    <Header />
-                    <div className="bg-white min-[768px]:max-[868px]:mt-[6rem] mt-[4.5rem]">
-                        <Outlet />
-                    </div>
+            <div>
+                <LandingHeader />
+                <div className="bg-white min-[768px]:max-[868px]:mt-[6rem] mt-[4.5rem]">
+                    <Outlet />
                 </div>
-            </AuthProvider>
+            </div>
         </>
     );
 }
