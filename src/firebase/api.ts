@@ -1,4 +1,5 @@
 import { UserCredential } from "@firebase/auth";
+import axios from "axios";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -6,8 +7,28 @@ import {
 } from "firebase/auth";
 import { collection, doc, getDoc, setDoc } from "firebase/firestore";
 import { Client } from "../interfaces/Client";
+import { Movie } from "../interfaces/Movie";
 
 import { auth, db, googleAuthProvider } from "./config";
+
+export async function getMovies(): Promise<Movie[]> {
+  const movies = (await (
+    await axios.get("/discover/movie")
+  ).data).results as Movie[];
+
+  console.log(movies)
+  return movies;
+}
+
+export async function getMovieById(id: number): Promise<Movie> {
+  const movie = (await (
+    await axios.get(`/movie/${id}`)
+  ).data) as Movie;
+
+  return movie;
+}
+
+
 
 export function createUser(client: Client, password: string) {
   const collectionRef = collection(db, "users");
