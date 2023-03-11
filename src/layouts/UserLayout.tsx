@@ -20,14 +20,12 @@ function UserLayout() {
 
   return (
     <>
-      <AuthProvider>
-        <div>
-          <Header />
-          <div className="bg-white min-[768px]:max-[868px]:mt-[6rem] mt-[4.5rem]">
-            <Outlet />
-          </div>
+      <div>
+        <Header />
+        <div className="bg-white min-[768px]:max-[868px]:mt-[6rem] mt-[4.5rem]">
+          <Outlet />
         </div>
-      </AuthProvider>
+      </div>
     </>
   );
 }

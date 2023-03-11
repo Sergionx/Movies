@@ -14,7 +14,9 @@ function App() {
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Searcher />} />
+          <Route path="/" element={<UserLayout />}>
+            <Route index element={<Searcher />} />
+          </Route>
 
           <Route path="/users" element={<UserLayout />}>
             <Route index element={<Navigate to="login" />} />
