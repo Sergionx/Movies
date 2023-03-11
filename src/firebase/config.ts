@@ -1,5 +1,6 @@
 
 // Import the functions you need from the SDKs you need
+import axios from "axios";
 import { initializeApp } from "firebase/app";
 import { FacebookAuthProvider, getAuth, GoogleAuthProvider } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
@@ -8,6 +9,11 @@ import { getStorage } from "firebase/storage";
 // https://firebase.google.com/docs/web/setup#available-libraries
 // Your web app's Firebase configuration
 
+axios.defaults.baseURL = import.meta.env.VITE_API_MOVIE_BASE_URL;
+axios.defaults.params = {
+  api_key: import.meta.env.VITE_API_MOVIE_KEY,
+  language: "es-ES",
+}
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_API_KEY,
