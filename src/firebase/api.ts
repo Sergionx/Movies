@@ -73,7 +73,7 @@ export async function signIn(
     return result;
   } catch (error) {
     console.log("error", error);
-    return null;
+    throw error;
   }
 }
 
@@ -93,7 +93,7 @@ export async function signInWithGoogle(): Promise<UserCredential | null> {
       setDoc(clientRef, client);
     }
 
-    auth.updateCurrentUser(result.user);
+    await auth.updateCurrentUser(result.user);
     return result;
   } catch (error) {
     console.log("error", error);
@@ -117,7 +117,7 @@ export async function signInWithGithub(): Promise<UserCredential | null> {
       setDoc(clientRef, client);
     }
 
-    auth.updateCurrentUser(result.user);
+    await auth.updateCurrentUser(result.user);
     return result;
   } catch (error) {
     console.log("error", error);

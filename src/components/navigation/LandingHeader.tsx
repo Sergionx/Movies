@@ -39,7 +39,10 @@ function LandingHeader() {
           {user ? (
             <>
               <button
-                onClick={logout}
+                onClick={() => {
+                  logout();
+                  navigate("/users/login");
+                }}
                 className="mt-8 md:mt-0 rounded-lg px-4 py-2 border-2 border-red-400 text-red-400 bg-white 
               hover:bg-[#2c2727] hover:text-white duration-300 font-[Poppins] md:ml-8 text-center
               active:scale-95 outline-none ring-offset-1 focus:ring-2 ring-red-400 "
