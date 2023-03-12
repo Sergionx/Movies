@@ -13,6 +13,7 @@ module.exports = {
         terciary2: "#A7CCED",
         terciary3: "#545E75",
         
+        
       }
     },
   },

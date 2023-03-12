@@ -6,6 +6,7 @@ import googleIcon from "../../assets/icons/google.svg";
 import facebookIcon from "../../assets/icons/facebook.svg";
 import { useAuth } from "../../hooks/useAuth";
 //import { Context } from "../store/appContext";
+import { ToastContainer, toast } from "react-toastify";
 //import Swal from "sweetalert2";
 
 export const LogIn = (props: any) => {
@@ -13,13 +14,6 @@ export const LogIn = (props: any) => {
     const [password, setPassword] = useState("");
     const { login } = useAuth();
     const navigate = useNavigate();
-    const notUser = () => {
-        //Swal.fire({
-        //icon: "error",
-        //title: "Ha ocurrido un error",
-        //text: "El usuario no está registrado, por favor registrese antes de iniciar sesión",
-        //});
-    };
 
     async function handleSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
@@ -34,10 +28,10 @@ export const LogIn = (props: any) => {
                     navigate("/psico");
                 }, 2000);
             } else {
-                console.log("no user");
+                toast.error("No se pudo inciar sesión");
             }
         } catch (error) {
-            console.log(error);
+            toast.error("Error");
         }
     }
 
@@ -46,10 +40,10 @@ export const LogIn = (props: any) => {
             <div className="bg-gray-300/40 px-14 py-7">
                 <div
                     className="backdrop-blur-lg bg-secondary drop-shadow-lg
-                      flex flex-row p-6 rounded-2xl justify-center"
+                    flex flex-row p-6 rounded-2xl justify-center"
                 >
                     <main className="flex flex-col  justify-center lg:w-[50%]">
-                        <p className="text-end mb-12  ">
+                        <p className="text-center mb-12 text-white ">
                             ¿No tienes una cuenta?{" "}
                             <Link
                                 to="/users/register"
@@ -58,12 +52,10 @@ export const LogIn = (props: any) => {
                                 Registrate
                             </Link>
                         </p>
-                        <h1 className="text-2xl font-bold text-center">
-                            Bienvenido!
+                        <h1 className="text-2xl font-bold text-center text-white">
+                            INICIA SESIÓN
                         </h1>
-                        <h2 className="text-center text-xl font-medium">
-                            Preparado para el cambio?
-                        </h2>
+
                         <form
                             className="my-10 flex flex-col justify-center gap-5 w-64 self-center"
                             onSubmit={handleSubmit}
@@ -75,25 +67,29 @@ export const LogIn = (props: any) => {
                                 onChange={(e) => setEmail(e.target.value)}
                             ></input>
                             <input
-                                className="rounded-lg p-4 border-2 border-primary-strong"
+                                className="rounded-lg p-4 border-2 border-primary"
                                 placeholder="Password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                             ></input>
-                            <p>Olvidaste tu contraseña?</p>
+                            <p className="text-white">
+                                Olvidaste tu contraseña?
+                            </p>
 
                             <button
                                 type="submit"
-                                className="w-full py-3 text-black font-bold rounded-lg shadow-lg
-                bg-primary-light hover:bg-primary-normal hover:scale-95 active:scale-90
-                  hover:ring-4 ring-primary-strong ring-offset-2 ring-offset-gray-100"
+                                className="w-full py-3  font-bold rounded-lg shadow-lg
+                bg-primary hover:bg-terciary2 hover:scale-95 active:scale-90
+                hover:ring-4 ring-primary-strong ring-offset-2 ring-offset-gray-100 text-white"
                             >
-                                INICIA SESIÓN
+                                INICIAR SESIÓN
                             </button>
                         </form>
 
                         <footer className="mb-5">
-                            <p className="text-center">O inicia sesión con</p>
+                            <p className="text-center text-white">
+                                O inicia sesión con
+                            </p>
                             <div className="flex justify-center gap-5 mt-5">
                                 <button
                                     className="bg-white hover:bg-gray-100 active:ring-1 ring-black font-bold py-2 px-4 rounded-full 

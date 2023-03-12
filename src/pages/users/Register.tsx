@@ -3,6 +3,8 @@ import { Navigate, useNavigate, Link } from "react-router-dom";
 import register from "../../assets/images/Register.jpg";
 import { createUser } from "../../firebase/api";
 
+import { ToastContainer, toast } from "react-toastify";
+
 import googleIcon from "../../assets/icons/google.svg";
 import facebookIcon from "../../assets/icons/facebook.svg";
 import { Client } from "../../interfaces/Client";
@@ -15,6 +17,28 @@ export const Register = (prop: any) => {
 
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
+        if (password.length <= 7) {
+            toast.error("La contraseña debe tener al menos 8 caracteres");
+            return;
+        }
+        if (
+            email === "" ||
+            password === "" ||
+            nombre === "" ||
+            confirmarcontraseña === ""
+        ) {
+            toast.warning("No puedes dejar espacios en blanco", {
+                position: "top-right",
+            });
+            return;
+        }
+
+        if (password !== confirmarcontraseña) {
+            toast.error("Las contraseñas no coinciden");
+
+            return;
+        }
+
         const user: Client | null = {
             email: email,
             name: nombre,
@@ -47,7 +71,7 @@ export const Register = (prop: any) => {
                             </Link>
                         </p>
                         <h1 className="text-2xl font-bold text-center">
-                            Bienvenido!
+                            Películas y series ilimitadas y mucho más
                         </h1>
                         <h2 className="text-center text-xl font-medium">
                             Registrate ingresando los siguientes datos
