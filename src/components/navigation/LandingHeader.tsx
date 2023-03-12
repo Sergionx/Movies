@@ -1,15 +1,21 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Menu from "../../assets/icons/menu.svg";
 
 import Logo from "../../assets/images/logo.png";
+import { useAuth } from "../../hooks/useAuth";
 
 function LandingHeader() {
-  let [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+  const { user, logout } = useAuth();
+
+  const navigate = useNavigate();
+
   return (
     <nav className="shadow-md w-full fixed top-0 left-0 z-[99]">
       <header className="md:flex items-center justify-between bg-[#2c2727] py-4 md:px-10 px-7">
         <div
+          onClick={() => navigate("/")}
           className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins] 
     text-gray-800"
         >
@@ -30,22 +36,39 @@ function LandingHeader() {
             open ? "top-28 " : "top-[-20rem]"
           }`}
         >
-          <Link
-            className="mt-8 rounded-lg px-4 py-2 border-2 border-primary text-primary bg-white 
+          {user ? (
+            <>
+              <button
+                onClick={logout}
+                className="mt-8 md:mt-0 rounded-lg px-4 py-2 border-2 border-red-400 text-red-400 bg-white 
+              hover:bg-[#2c2727] hover:text-white duration-300 font-[Poppins] md:ml-8 text-center
+              active:scale-95 outline-none ring-offset-1 focus:ring-2 ring-red-400 "
+              >
+                Log out
+              </button>
+
+              <h1 className="text-white ml-4 mt-8 md:mt-0 text-xl">Binevenido {user.name} !</h1>
+            </>
+          ) : (
+            <>
+              <Link
+                className="mt-8 md:mt-0 rounded-lg px-4 py-2 border-2 border-primary text-primary bg-white 
               hover:bg-[#2c2727] hover:text-white duration-300 font-[Poppins] md:ml-8 text-center
               active:scale-95 outline-none ring-offset-1 focus:ring-2 ring-primary "
-            to="/users/login"
-          >
-            Iniciar sesión
-          </Link>
-          <Link
-            className="mt-8 bg-terciary1 hover:bg-terciary2  drop-shadow-md
+                to="/users/login"
+              >
+                Iniciar sesión
+              </Link>
+              <Link
+                className="mt-8 md:mt-0 bg-terciary1 hover:bg-terciary2  drop-shadow-md
                 rounded-lg py-2 px-6 text-center duration-300 font-[Poppins] ml-5 
                 active:scale-95 outline-none ring-offset-1 hover:ring-2 focus:ring-2 ring-primary-strong"
-            to="/users/register"
-          >
-            Registrarse
-          </Link>
+                to="/users/register"
+              >
+                Registrarse
+              </Link>
+            </>
+          )}
         </ul>
       </header>
     </nav>
