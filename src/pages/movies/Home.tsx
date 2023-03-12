@@ -87,10 +87,9 @@ function Home() {
 
       <div
         className={`flex flex-wrap gap-5 mt-4 justify-center relative
-        ${loading && "h-[60rem]"}
+        ${loading && "min-h-[60rem]"}
         border-[5px] rounded-xl border-secondary p-2 bg-terciary3`}
       >
-        {/* TODO - mejorar que se vea loading */}
         {loading && (
           <Loading
             svgClass="h-[20rem] w-[20rem]"
