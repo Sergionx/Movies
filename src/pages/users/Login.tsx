@@ -30,8 +30,41 @@ export const LogIn = (props: any) => {
       } else {
         toast.error("No se pudo inciar sesión");
       }
-    } catch (error) {
-      toast.error("Error");
+    } catch (error: any) {
+      switch (error.code) {
+        case "auth/email-already-in-use":
+          toast.error("El correo ya esta en uso");
+          break;
+
+        case "auth/invalid-email":
+          toast.error("El correo no es valido");
+          break;
+
+        case "auth/weak-password":
+          toast.error("La contraseña es muy débil");
+          break;
+
+        case "auth/operation-not-allowed":
+          toast.error("No se puede crear una cuenta con este correo");
+          break;
+
+        case "auth/user-not-found":
+          toast.error("No se encontro un usuario con este correo");
+          break;
+        
+        case "auth/wrong-password":
+          toast.error("Contraseña incorrecta");
+          break;
+        
+        case "auth/account-exists-with-different-credential":
+          toast.error("Ya existe una cuenta con este correo");
+          break;
+        
+        default:
+          toast.error("Error al crear la cuenta");
+          console.log(error);
+          break;
+      }
     }
   }
   const handleGoogleSignIn = async () => {
