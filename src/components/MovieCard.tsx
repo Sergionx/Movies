@@ -20,7 +20,9 @@ function MovieCard(props: Props) {
   const [language, setLanguage] = useState<string>(
     props.movie.original_language == "en"
       ? "us"
-      : props.movie.original_language == "ja" ? "jp" : "es"
+      : props.movie.original_language == "ja"
+      ? "jp"
+      : "es"
   );
 
   const navigate = useNavigate();
@@ -30,7 +32,11 @@ function MovieCard(props: Props) {
   }
 
   return (
-    <div className="relative cursor-pointer rounded-xl shadow-primary shadow-md" onClick={handleClick}>
+    <div
+      className="relative cursor-pointer rounded- shadow-md 
+      hover:shadow-lg hover:shadow-primary transition-shadow duration-300 ease-in-out hover:scale-95"
+      onClick={handleClick}
+    >
       <div className="flex flex-col items-center">
         <img
           src={getMoviePoster(props.movie.poster_path)}
