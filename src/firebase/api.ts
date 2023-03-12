@@ -21,7 +21,7 @@ export async function getMovies(): Promise<Movie[]> {
   return movies;
 }
 
-export async function getMovieById(id: number): Promise<Movie> {
+export async function getMovieById(id: string): Promise<Movie> {
   const movie = (await (
     await axios.get(`/movie/${id}`)
   ).data) as Movie;
