@@ -32,6 +32,13 @@ export const Register = (prop: any) => {
             });
             return;
         }
+
+        if (password !== confirmarcontraseña) {
+            toast.error("Las contraseñas no coinciden");
+
+            return;
+        }
+
         const user: Client | null = {
             email: email,
             name: nombre,

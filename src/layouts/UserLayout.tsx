@@ -3,6 +3,7 @@ import { Navigate, Outlet } from "react-router-dom";
 import AuthProvider from "../contexts/AuthProvider";
 import { useAuth } from "../hooks/useAuth";
 import LandingHeader from "../components/navigation/LandingHeader";
+import { Footer } from "../components/navigation/Footer";
 
 function UserLayout() {
     const { user, loading } = useAuth();
@@ -25,6 +26,7 @@ function UserLayout() {
                 <div className="bg-white min-[768px]:max-[868px]:mt-[6rem] mt-[4.5rem]">
                     <Outlet />
                 </div>
+                <Footer />
             </div>
         </>
     );
