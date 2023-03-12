@@ -14,14 +14,28 @@ function Searcher() {
 
   useBottomScrollListener(addMovies);
 
-  async function addMovies() {}
+  async function addMovies() {
+    if (loading) return;
+
+    setLoading(true);
+    const newMovies = await getSearchMovie(inputValue, currentPage + 1);
+    if (newMovies.length === 0) {
+      setLoading(false);
+      return;
+    };
+    setMovies([...movies, ...newMovies]);
+    setCurrentPage(currentPage + 1);
+    setLoading(false);
+
+  }
 
   function handleSearch(value: string) {
     setInputValue(value);
+    setCurrentPage(1);
 
     if (value.length > 2) {
       setLoading(true);
-      getSearchMovie(value).then((movies) => {
+      getSearchMovie(value, currentPage).then((movies) => {
         setMovies(movies);
         setLoading(false);
       });

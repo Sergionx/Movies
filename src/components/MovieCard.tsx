@@ -28,7 +28,7 @@ function MovieCard(props: Props) {
   const navigate = useNavigate();
 
   function handleClick(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
-    navigate(`${props.movie.id}`);
+    navigate(`/movies/${props.movie.id}`);
   }
 
   return (
