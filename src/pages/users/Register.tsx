@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Navigate, useNavigate, Link } from "react-router-dom";
-import registerImg from "../../assets/images/Register.jpg";
+import registerImg from "../../assets/images/register.jpeg";
 import { createUser } from "../../firebase/api";
 
 import { toast } from "react-toastify";
