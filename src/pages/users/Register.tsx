@@ -16,7 +16,7 @@ export const Register = (prop: any) => {
   const [password, setPassword] = useState("");
   const [confirmarcontraseña, setconfirmarcontraseña] = useState("");
 
-  const { register } = useAuth();
+  const { register, loginWithGoogle, loginWithFacebook } = useAuth();
   const navigate = useNavigate();
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -50,13 +50,12 @@ export const Register = (prop: any) => {
         name: nombre,
       };
       const userCredential = await register(user, password);
-      
-      if(userCredential){
+
+      if (userCredential) {
         toast.success("Cuenta creada con exito");
         setTimeout(() => {
           navigate("/users/login");
         }, 2000);
-
       } else {
         toast.error("No se pudo crear la cuenta");
       }
@@ -88,6 +87,14 @@ export const Register = (prop: any) => {
       }
     }
   }
+  const handleGoogleSignIn = async () => {
+    await loginWithGoogle();
+    navigate("/movies");
+  };
+  const handlefacebookSignIn = async () => {
+    await loginWithFacebook();
+    navigate("/movies");
+  };
 
   return (
     <>
@@ -173,12 +180,14 @@ export const Register = (prop: any) => {
                 <button
                   className="bg-white hover:bg-gray-100 active:ring-1 ring-black font-bold py-2 px-4 rounded-full 
                 drop-shadow-md hover:drop-shadow-lg"
+                  onClick={handlefacebookSignIn}
                 >
                   <img src={facebookIcon} />
                 </button>
                 <button
                   className="bg-white hover:bg-gray-100 active:ring-1 ring-black font-bold py-2 px-4 rounded-full 
                 drop-shadow-md hover:drop-shadow-lg"
+                  onClick={handleGoogleSignIn}
                 >
                   <img src={googleIcon} />
                 </button>

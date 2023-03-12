@@ -1,18 +1,13 @@
-import React, { useEffect } from 'react'
-import { getMovies } from '../firebase/api'
+import React, { useEffect } from "react";
+import SearchBar from "../components/SearchBar";
+import { getMovies } from "../firebase/api";
 
 function Searcher() {
-
-
-
-  useEffect(() => {
-    getMovies()
-    console.log('Searcher')
-  }, [])
-
   return (
-    <div>Searcher</div>
-  )
+    <div>
+      <SearchBar placeholder="Ingre el nombre de la película" />
+    </div>
+  );
 }
 
-export default Searcher
+export default Searcher;

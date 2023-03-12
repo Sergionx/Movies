@@ -7,6 +7,6 @@ export interface IAuthProvider {
   login: (email: string, password: string) => Promise<UserCredential | null>;
   register: (client: Client, password: string) => Promise<UserCredential | null>;
   logout: () => Promise<void>;
-  loginWithGoogle: (client: Client) => Promise<UserCredential | null>;
-  loginWithFacebook: (client: Client) => Promise<UserCredential | null>;
+  loginWithGoogle: (client?: Client) => Promise<UserCredential | null>;
+  loginWithFacebook: (client?: Client) => Promise<UserCredential | null>;
 }
