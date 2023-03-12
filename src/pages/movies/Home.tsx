@@ -74,7 +74,7 @@ function Home() {
 
   return (
     <div className="bg-terciary2 p-8">
-      <span className="flex justify-evenly">
+      <span className="flex justify-between">
         <h1 className="text-3xl font-bold ">Movies</h1>
 
         <button

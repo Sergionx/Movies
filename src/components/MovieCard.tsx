@@ -63,7 +63,7 @@ function MovieCard(props: Props) {
                 className="fill-none"
                 strokeWidth={2.8}
                 stroke={color}
-                strokeDasharray={`${props.movie.vote_average * 10}, 100`}
+                strokeDasharray={`${(props.movie.vote_average * 10).toFixed(2)}, 100`}
                 d="M18 2.0845
           a 15.9155 15.9155 0 0 1 0 31.831
           a 15.9155 15.9155 0 0 1 0 -31.831"
@@ -75,7 +75,7 @@ function MovieCard(props: Props) {
                 fill="white"
                 textAnchor="middle"
               >
-                {props.movie.vote_average * 10}%
+                {(props.movie.vote_average * 10).toFixed(2)}%
               </text>
             </svg>
           </div>
