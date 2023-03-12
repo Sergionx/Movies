@@ -80,6 +80,20 @@ export async function signIn(
 export async function signInWithGoogle(): Promise<UserCredential | null> {
   try {
     const result = await signInWithPopup(auth, googleAuthProvider);
+    const collectionRef = collection(db, "users");
+
+    const document = await getDoc(doc(collectionRef, result.user?.uid));
+    if (!document.exists()) {
+      const client: Client = {
+        email: result.user?.email ?? "",
+        name: result.user?.displayName ?? "",
+      }
+
+      const clientRef = doc(collectionRef, result.user?.uid);
+      setDoc(clientRef, client);
+    }
+
+    auth.updateCurrentUser(result.user);
     return result;
   } catch (error) {
     console.log("error", error);
@@ -90,6 +104,20 @@ export async function signInWithGoogle(): Promise<UserCredential | null> {
 export async function signInWithFacebook(): Promise<UserCredential | null> {
   try {
     const result = await signInWithPopup(auth, facebookAuthProvider);
+    const collectionRef = collection(db, "users");
+
+    const document = await getDoc(doc(collectionRef, result.user?.uid));
+    if (!document.exists()) {
+      const client: Client = {
+        email: result.user?.email ?? "",
+        name: result.user?.displayName ?? "",
+      }
+
+      const clientRef = doc(collectionRef, result.user?.uid);
+      setDoc(clientRef, client);
+    }
+
+    auth.updateCurrentUser(result.user);
     return result;
   } catch (error) {
     console.log("error", error);
