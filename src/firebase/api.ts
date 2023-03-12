@@ -1,4 +1,4 @@
-import { FacebookAuthProvider, UserCredential } from "@firebase/auth";
+import {  GithubAuthProvider, UserCredential } from "@firebase/auth";
 import axios from "axios";
 import {
   createUserWithEmailAndPassword,
@@ -9,7 +9,7 @@ import { collection, doc, getDoc, setDoc } from "firebase/firestore";
 import { Client } from "../interfaces/Client";
 import { Movie } from "../interfaces/Movie";
 
-import { auth, db, facebookAuthProvider, googleAuthProvider } from "./config";
+import { auth, db, githubAuthProvider, googleAuthProvider } from "./config";
 
 // TODO - Usar pages para pagination
 export async function getMovies(page: number): Promise<Movie[]> {
@@ -101,9 +101,9 @@ export async function signInWithGoogle(): Promise<UserCredential | null> {
   }
 }
 
-export async function signInWithFacebook(): Promise<UserCredential | null> {
+export async function signInWithGithub(): Promise<UserCredential | null> {
   try {
-    const result = await signInWithPopup(auth, facebookAuthProvider);
+    const result = await signInWithPopup(auth, githubAuthProvider);
     const collectionRef = collection(db, "users");
 
     const document = await getDoc(doc(collectionRef, result.user?.uid));
