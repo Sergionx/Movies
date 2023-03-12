@@ -45,6 +45,9 @@ export async function getSearchMovie(query: string): Promise<Movie[]> {
   return movies;
 }
 
+export function getMoviePoster(posterPath: string): string {
+  return `https://image.tmdb.org/t/p/w500${posterPath}`;
+}
 
 export function createUser(client: Client, password: string) {
   const collectionRef = collection(db, "users");
