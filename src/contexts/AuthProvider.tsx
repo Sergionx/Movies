@@ -8,7 +8,7 @@ import {
   createUser,
   getUserById,
   signIn,
-  signInWithFacebook,
+  signInWithGithub,
   signInWithGoogle,
 } from "../firebase/api";
 import { auth } from "../firebase/config";
@@ -38,7 +38,7 @@ export const AuthContext = createContext<IAuthProvider>({
     console.log("no estas usando la funcion que es");
     return new Promise(() => {});
   },
-  loginWithFacebook: (client?: Client) => {
+  loginWithGithub: (client?: Client) => {
     console.log("no estas usando la funcion que es");
     return new Promise(() => {});
   },
@@ -94,8 +94,8 @@ function AuthProvider({ children }: IProps) {
     return signInWithGoogle();
   }
 
-  async function loginWithFacebook() {
-    return signInWithFacebook();
+  async function loginWithGithub() {
+    return signInWithGithub();
   }
 
   const value: IAuthProvider = {
@@ -105,7 +105,7 @@ function AuthProvider({ children }: IProps) {
     register,
     logout,
     loginWithGoogle,
-    loginWithFacebook,
+    loginWithGithub,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

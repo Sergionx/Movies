@@ -2,7 +2,7 @@
 // Import the functions you need from the SDKs you need
 import axios from "axios";
 import { initializeApp } from "firebase/app";
-import { FacebookAuthProvider, getAuth, GoogleAuthProvider } from "firebase/auth";
+import { getAuth, GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 // TODO: Add SDKs for Firebase products that you want to use
@@ -34,5 +34,5 @@ export const storage = getStorage(app);
 export const googleAuthProvider = new GoogleAuthProvider();
 googleAuthProvider.setCustomParameters({ prompt: "select_account" });
 
-export const facebookAuthProvider = new FacebookAuthProvider();
-facebookAuthProvider.setCustomParameters({ display: "popup" });
+export const githubAuthProvider = new GithubAuthProvider();
+githubAuthProvider.setCustomParameters({ prompt: "select_account" });

@@ -6,7 +6,7 @@ import { createUser } from "../../firebase/api";
 import { toast } from "react-toastify";
 
 import googleIcon from "../../assets/icons/google.svg";
-import facebookIcon from "../../assets/icons/facebook.svg";
+import githubIcon from "../../assets/icons/github.svg";
 import { Client } from "../../interfaces/Client";
 import { useAuth } from "../../hooks/useAuth";
 
@@ -16,7 +16,7 @@ export const Register = (prop: any) => {
   const [password, setPassword] = useState("");
   const [confirmarcontraseña, setconfirmarcontraseña] = useState("");
 
-  const { register, loginWithGoogle, loginWithFacebook } = useAuth();
+  const { register, loginWithGoogle, loginWithGithub } = useAuth();
   const navigate = useNavigate();
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -91,8 +91,8 @@ export const Register = (prop: any) => {
     await loginWithGoogle();
     navigate("/movies");
   };
-  const handlefacebookSignIn = async () => {
-    await loginWithFacebook();
+  const handleGithubSignIn = async () => {
+    await loginWithGithub();
     navigate("/movies");
   };
 
@@ -180,9 +180,9 @@ export const Register = (prop: any) => {
                 <button
                   className="bg-white hover:bg-gray-100 active:ring-1 ring-black font-bold py-2 px-4 rounded-full 
                 drop-shadow-md hover:drop-shadow-lg"
-                  onClick={handlefacebookSignIn}
+                  onClick={handleGithubSignIn}
                 >
-                  <img src={facebookIcon} />
+                  <img src={githubIcon} />
                 </button>
                 <button
                   className="bg-white hover:bg-gray-100 active:ring-1 ring-black font-bold py-2 px-4 rounded-full 

@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import psicoLogin from "../../assets/images/psicoLogin.png";
 import googleIcon from "../../assets/icons/google.svg";
-import facebookIcon from "../../assets/icons/facebook.svg";
+import githubIcon from "../../assets/icons/github.svg";
 import { useAuth } from "../../hooks/useAuth";
 //import { Context } from "../store/appContext";
 import { ToastContainer, toast } from "react-toastify";
@@ -12,7 +12,7 @@ import { ToastContainer, toast } from "react-toastify";
 export const LogIn = (props: any) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { login, loginWithGoogle, loginWithFacebook } = useAuth();
+  const { login, loginWithGoogle, loginWithGithub } = useAuth();
   const navigate = useNavigate();
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
@@ -38,8 +38,8 @@ export const LogIn = (props: any) => {
     await loginWithGoogle();
     navigate("/movies");
   };
-  const handlefacebookSignIn = async () => {
-    await loginWithFacebook();
+  const handleGithubSignIn = async () => {
+    await loginWithGithub();
     navigate("/movies");
   };
   return (
@@ -97,9 +97,9 @@ export const LogIn = (props: any) => {
                 <button
                   className="bg-white hover:bg-gray-100 active:ring-1 ring-black font-bold py-2 px-4 rounded-full 
                 drop-shadow-md hover:drop-shadow-lg"
-                  onClick={handlefacebookSignIn}
+                  onClick={handleGithubSignIn}
                 >
-                  <img src={facebookIcon} />
+                  <img src={githubIcon} />
                 </button>
                 <button
                   className="bg-white hover:bg-gray-100 active:ring-1 ring-black font-bold py-2 px-4 rounded-full 
