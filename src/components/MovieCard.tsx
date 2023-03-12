@@ -17,39 +17,38 @@ function MovieCard(props: Props) {
       ? "yellow"
       : "red";
 
+  const [language, setLanguage] = useState<string>(
+    props.movie.original_language == "en"
+      ? "us"
+      : props.movie.original_language == "ja" ? "jp" : "es"
+  );
+
   const navigate = useNavigate();
-
-  const circleStyle = {
-    "stroke-width": 2.0,
-  } as React.CSSProperties;
-
-  const textStyle = {
-    "text-anchor": "middle",
-  } as React.CSSProperties;
 
   function handleClick(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
     navigate(`${props.movie.id}`);
   }
 
   return (
-    <div className="relative" onClick={handleClick}>
+    <div className="relative cursor-pointer rounded-xl shadow-primary shadow-md" onClick={handleClick}>
       <div className="flex flex-col items-center">
         <img
           src={getMoviePoster(props.movie.poster_path)}
           className="h-[20rem] w-[15rem] object-cover rounded-xl"
         />
-        <div className="w-full absolute bottom-0 left-0 movie-footer-gradient px-4 pt-12 pb-4">
+
+        <footer className="w-full absolute bottom-0 left-0 movie-footer-gradient px-4 pt-12 pb-4 rounded-xl">
           <h1 className="text-xl font-bold text-white text-center ">
             {props.movie.title}
           </h1>
-        </div>
+        </footer>
 
-        <div className="w-full absolute top-0 left-0 movie-footer-gradient px-4 flex justify-between">
+        <header className="w-full absolute top-0 left-0 movie-footer-gradient px-4 flex justify-between">
           <div id="percentge" className="w-[33%]">
             <svg viewBox="0 0 36 36" className="block my-2 max-w-[70%]">
               <path
                 className="fill-none stroke-[#eee]"
-                style={circleStyle}
+                strokeWidth={1.5}
                 d="M18 2.0845
           a 15.9155 15.9155 0 0 1 0 31.831
           a 15.9155 15.9155 0 0 1 0 -31.831"
@@ -58,7 +57,7 @@ function MovieCard(props: Props) {
                 className="fill-none"
                 strokeWidth={2.8}
                 stroke={color}
-                stroke-dasharray={`${props.movie.vote_average * 10}, 100`}
+                strokeDasharray={`${props.movie.vote_average * 10}, 100`}
                 d="M18 2.0845
           a 15.9155 15.9155 0 0 1 0 31.831
           a 15.9155 15.9155 0 0 1 0 -31.831"
@@ -68,7 +67,7 @@ function MovieCard(props: Props) {
                 y="20.35"
                 className="text-ellipsis  text-[0.5rem]"
                 fill="white"
-                style={textStyle}
+                textAnchor="middle"
               >
                 {props.movie.vote_average * 10}%
               </text>
@@ -77,11 +76,7 @@ function MovieCard(props: Props) {
 
           <Flag
             className="h-5 self-center"
-            code={
-              props.movie.original_language == "en"
-                ? "us"
-                : props.movie.original_language
-            }
+            code={language}
             fallback={<h1>hola</h1>}
           />
           {/* <div
@@ -117,7 +112,7 @@ function MovieCard(props: Props) {
               {props.movie.vote_average * 10}%
             </span>
           </div> */}
-        </div>
+        </header>
       </div>
     </div>
   );
