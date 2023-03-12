@@ -1,4 +1,4 @@
-import {  GithubAuthProvider, UserCredential } from "@firebase/auth";
+import { GithubAuthProvider, UserCredential } from "@firebase/auth";
 import axios from "axios";
 import {
   createUserWithEmailAndPassword,
@@ -32,9 +32,15 @@ export async function getMovieUpcoming(page: number): Promise<Movie[]> {
   return movies;
 }
 
-export async function getSearchMovie(query: string): Promise<Movie[]> {
-  const movies = (await (await axios.get(`/search/movie?query=${query}`)).data)
-    .results as Movie[];
+export async function getSearchMovie(
+  query: string,
+  page: number
+): Promise<Movie[]> {
+  const movies = (
+    await (
+      await axios.get(`/search/movie?query=${query}&page=${page}`)
+    ).data
+  ).results as Movie[];
 
   return movies;
 }
@@ -49,18 +55,18 @@ export function createUser(
 ): Promise<UserCredential | null> {
   const collectionRef = collection(db, "users");
   console.log("Creating user", client.email);
-  return createUserWithEmailAndPassword(auth, client.email, password).then(
-    (userCredential) => {
+  return createUserWithEmailAndPassword(auth, client.email, password)
+    .then((userCredential) => {
       const user = userCredential.user;
 
       const clientRef = doc(collectionRef, user.uid);
       setDoc(clientRef, client);
       console.log("User created", user.uid);
       return userCredential;
-    }
-  ).catch((error) => {
-    throw error;
-  });
+    })
+    .catch((error) => {
+      throw error;
+    });
 }
 
 export async function signIn(
@@ -73,7 +79,7 @@ export async function signIn(
     return result;
   } catch (error) {
     console.log("error", error);
-    return null;
+    throw error;
   }
 }
 
@@ -87,13 +93,13 @@ export async function signInWithGoogle(): Promise<UserCredential | null> {
       const client: Client = {
         email: result.user?.email ?? "",
         name: result.user?.displayName ?? "",
-      }
+      };
 
       const clientRef = doc(collectionRef, result.user?.uid);
       setDoc(clientRef, client);
     }
 
-    auth.updateCurrentUser(result.user);
+    await auth.updateCurrentUser(result.user);
     return result;
   } catch (error) {
     console.log("error", error);
@@ -111,13 +117,13 @@ export async function signInWithGithub(): Promise<UserCredential | null> {
       const client: Client = {
         email: result.user?.email ?? "",
         name: result.user?.displayName ?? "",
-      }
+      };
 
       const clientRef = doc(collectionRef, result.user?.uid);
       setDoc(clientRef, client);
     }
 
-    auth.updateCurrentUser(result.user);
+    await auth.updateCurrentUser(result.user);
     return result;
   } catch (error) {
     console.log("error", error);

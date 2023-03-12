@@ -1,18 +1,30 @@
-import react from "react";
+import React, { useState } from "react";
+import searchIcon from "../assets/icons/search.svg";
 
-interface Props {
-  placeholder: string;
-  data: string;
+interface SearchBarProps {
+  handleSearch: (value: string) => void;
+  searchValue: string;
 }
 
-function SearchBar(props: Props) {
+function SearchBar(props: SearchBarProps) {
+
+
   return (
-    <div className="search">
-      <div className="searchInputs"></div>
-      <input type="text" placeholder={props.placeholder} />
-      <div className="earchIcon"></div>
-      <div className="dataResult"></div>
+    <div
+      className="bg-white w-full rounded-lg p-2 h-12 flex items-center 
+      focus-within:ring-2 focus-within:ring-primary
+      "
+    >
+      <input
+        className="bg-transparent w-full h-full outline-none text-lg"
+        type="text"
+        placeholder="Search for a movie"
+        value={props.searchValue}
+        onChange={(e) => props.handleSearch(e.target.value)}
+      />
+      <img src={searchIcon} className="w-6 h-auto " />
     </div>
   );
 }
+
 export default SearchBar;

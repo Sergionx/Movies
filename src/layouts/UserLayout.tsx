@@ -6,18 +6,6 @@ import LandingHeader from "../components/navigation/LandingHeader";
 import { Footer } from "../components/navigation/Footer";
 
 function UserLayout() {
-    const { user, loading } = useAuth();
-
-    // TODO - Crear componente para cargar
-    // if (loading) {
-    //   return (
-    //     <>
-    //       <AuthProvider>
-    //         <h1>Loading</h1>
-    //       </AuthProvider>
-    //     </>
-    //   );
-    // }
 
     return (
         <>

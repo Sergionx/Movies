@@ -3,6 +3,7 @@ import { Navigate, Outlet, useNavigate } from "react-router-dom";
 import Loading from "../components/Loading";
 import Footer from "../components/navigation/Footer";
 import Header from "../components/navigation/LandingHeader";
+import NoUser from "../components/NoUser";
 import AuthProvider from "../contexts/AuthProvider";
 import { useAuth } from "../hooks/useAuth";
 
@@ -28,21 +29,26 @@ function ProtectedLayout() {
         );
     }
 
-    // // TODO - Crear componente para usuario no logueado
-    // if (!user) {
-    //     setTimeout(() => {
-    //         console.log(
-    //             "No estas logueado mi loco, seras redirigido en 5 segundos al login"
-    //         );
-    //         navigate("/users/login");
-    //     }, 5000);
-    //     return (
-    //         <h1>
-    //             No estas logueado mi loco, seras redirigido en 5 segundos al
-    //             login
-    //         </h1>
-    //     );
-    // }
+    // TODO - Crear componente para usuario no logueado
+    if (!user) {
+        setTimeout(() => {
+            console.log(
+                "No estas logueado mi loco, seras redirigido en 5 segundos al login"
+            );
+            navigate("/users/login");
+        }, 5000);
+        return (
+          <>
+          <div>
+              <Header />
+              <div className="bg-white mt-[7rem]">
+                  <NoUser />
+              </div>
+              <Footer />
+          </div>
+      </>
+        );
+    }
 
     return (
         <>

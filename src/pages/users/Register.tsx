@@ -80,6 +80,19 @@ export const Register = (prop: any) => {
           toast.error("No se puede crear una cuenta con este correo");
           break;
 
+        case "auth/user-not-found":
+          toast.error("No se encontro un usuario con este correo");
+          break;
+        
+        case "auth/wrong-password":
+          toast.error("Contraseña incorrecta");
+          break;
+        
+        case "auth/account-exists-with-different-credential":
+          toast.error("Ya existe una cuenta con este correo");
+          break;
+        
+
         default:
           toast.error("Error al crear la cuenta");
           console.log(error);

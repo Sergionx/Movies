@@ -86,7 +86,8 @@ function AuthProvider({ children }: IProps) {
   }
 
   async function logout() {
-    return auth.signOut();
+    auth.signOut();
+    setUser(null);
   }
 
   async function loginWithGoogle() {

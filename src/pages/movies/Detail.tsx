@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getMovieById, getMoviePoster } from "../../firebase/api";
 import { Movie } from "../../interfaces/Movie";
+import Error404 from "../Error404";
 
 function Detail() {
   let { id } = useParams();
@@ -27,7 +28,7 @@ function Detail() {
     }).format(number);
   }
   if (!movie) {
-    return <div> Loading... </div>;
+    return <div> <Error404 /> </div>;
   } else {
     const imgStyle = {
       backgroundImage: `url(${getMoviePoster(movie!.backdrop_path)})`,
@@ -89,7 +90,7 @@ function Detail() {
                           <img
                             key={company.id}
                             src={getMoviePoster(company.logo_path)}
-                            className="h-auto w-[8rem] object-cover rounded-xl"
+                            className="h-auto w-[8rem] object-cover "
                           />
                         ))}
                       </div>

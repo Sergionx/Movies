@@ -28,7 +28,7 @@ function MovieCard(props: Props) {
   const navigate = useNavigate();
 
   function handleClick(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
-    navigate(`${props.movie.id}`);
+    navigate(`/movies/${props.movie.id}`);
   }
 
   return (
@@ -63,7 +63,7 @@ function MovieCard(props: Props) {
                 className="fill-none"
                 strokeWidth={2.8}
                 stroke={color}
-                strokeDasharray={`${props.movie.vote_average * 10}, 100`}
+                strokeDasharray={`${(props.movie.vote_average * 10).toFixed(0)}, 100`}
                 d="M18 2.0845
           a 15.9155 15.9155 0 0 1 0 31.831
           a 15.9155 15.9155 0 0 1 0 -31.831"
@@ -71,11 +71,11 @@ function MovieCard(props: Props) {
               <text
                 x="18"
                 y="20.35"
-                className="text-ellipsis  text-[0.5rem]"
+                className="text-ellipsis  text-[0.6rem]"
                 fill="white"
                 textAnchor="middle"
               >
-                {props.movie.vote_average * 10}%
+                {(props.movie.vote_average * 10).toFixed(0)}%
               </text>
             </svg>
           </div>
