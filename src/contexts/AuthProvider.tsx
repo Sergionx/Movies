@@ -4,7 +4,7 @@ import {
   UserCredential,
 } from "firebase/auth";
 import React, { createContext, useEffect, useState } from "react";
-import { getUserById, signIn } from "../firebase/api";
+import { createUser, getUserById, signIn, signInWithFacebook, signInWithGoogle } from "../firebase/api";
 import { auth } from "../firebase/config";
 import { Client } from "../interfaces/Client";
 import { IAuthProvider } from "../interfaces/providers/IAuthProvider";
@@ -17,6 +17,22 @@ export const AuthContext = createContext<IAuthProvider>({
   user: null,
   loading: true,
   login: (email: string, password: string) => {
+    console.log("no estas usando la funcion que es");
+    return new Promise(() => {});
+  },
+  register: (client: Client, password: string) => {
+    console.log("no estas usando la funcion que es");
+    return new Promise(() => {});
+  },
+  logout: () => {
+    console.log("no estas usando la funcion que es");
+    return new Promise(() => {});
+  },
+  loginWithGoogle: (client: Client) => {
+    console.log("no estas usando la funcion que es");
+    return new Promise(() => {});
+  },
+  loginWithFacebook: (client: Client) => {
     console.log("no estas usando la funcion que es");
     return new Promise(() => {});
   },
@@ -56,10 +72,33 @@ function AuthProvider({ children }: IProps) {
     return signIn(email, password);
   }
 
+  async function register(
+    client: Client,
+    password: string
+  ): Promise<UserCredential | null> {
+    return createUser(client, password);
+  }
+
+  async function logout() {
+    return auth.signOut();
+  }
+
+  async function loginWithGoogle(client: Client) {
+    return signInWithGoogle()
+  }
+
+  async function loginWithFacebook(client: Client) {
+    return signInWithFacebook()
+  }
+
   const value: IAuthProvider = {
     user,
     loading,
     login,
+    register,
+    logout,
+    loginWithGoogle,
+    loginWithFacebook,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
