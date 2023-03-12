@@ -12,12 +12,10 @@ import { Movie } from "../interfaces/Movie";
 import { auth, db, googleAuthProvider } from "./config";
 
 // TODO - Usar pages para pagination
-export async function getMovies(): Promise<Movie[]> {
-  const movies = (await (
-    await axios.get("/discover/movie")
-  ).data).results as Movie[];
+export async function getMovies(page: number): Promise<Movie[]> {
+  const movies = (await (await axios.get(`/movie/popular?page=${page}`)).data)
+    .results as Movie[];
 
-  console.log(movies)
   return movies;
 }
 
@@ -29,18 +27,16 @@ export async function getMovieById(id: string): Promise<Movie> {
   return movie;
 }
 
-export async function getMovieUpcoming(): Promise<Movie[]> {
-  const movies = (await (
-    await axios.get("/movie/upcoming")
-  ).data).results as Movie[];
+export async function getMovieUpcoming(page: number): Promise<Movie[]> {
+  const movies = (await (await axios.get(`/movie/upcoming?page=${page}`)).data)
+    .results as Movie[];
 
   return movies;
 }
 
 export async function getSearchMovie(query: string): Promise<Movie[]> {
-  const movies = (await (
-    await axios.get(`/search/movie?query=${query}`)
-  ).data).results as Movie[];
+  const movies = (await (await axios.get(`/search/movie?query=${query}`)).data)
+    .results as Movie[];
 
   return movies;
 }
