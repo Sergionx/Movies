@@ -27,11 +27,11 @@ function App() {
                         <Route path="*" element={<Error404 />} />
                     </Route>
 
-                    <Route path="/movies" element={<ProtectedLayout />}>
-                        <Route index element={<Home />} />
-                        <Route path="movie/:id" element={<Detail />} />
-                        <Route path="*" element={<Error404 />} />
-                    </Route>
+          <Route path="/movies" element={<ProtectedLayout />}>
+            <Route index element={<Home />} />
+            <Route path=":id" element={<Detail />} />
+            <Route path="*" element={<Error404 />} />
+          </Route>
 
                     <Route path="*" element={<Error404 />} />
                 </Routes>

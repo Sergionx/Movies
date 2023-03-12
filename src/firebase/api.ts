@@ -11,6 +11,7 @@ import { Movie } from "../interfaces/Movie";
 
 import { auth, db, googleAuthProvider } from "./config";
 
+// TODO - Usar pages para pagination
 export async function getMovies(): Promise<Movie[]> {
   const movies = (await (
     await axios.get("/discover/movie")
@@ -28,7 +29,25 @@ export async function getMovieById(id: number): Promise<Movie> {
   return movie;
 }
 
+export async function getMovieUpcoming(): Promise<Movie[]> {
+  const movies = (await (
+    await axios.get("/movie/upcoming")
+  ).data).results as Movie[];
 
+  return movies;
+}
+
+export async function getSearchMovie(query: string): Promise<Movie[]> {
+  const movies = (await (
+    await axios.get(`/search/movie?query=${query}`)
+  ).data).results as Movie[];
+
+  return movies;
+}
+
+export function getMoviePoster(posterPath: string): string {
+  return `https://image.tmdb.org/t/p/w500${posterPath}`;
+}
 
 export function createUser(client: Client, password: string) {
   const collectionRef = collection(db, "users");

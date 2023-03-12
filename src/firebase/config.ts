@@ -13,6 +13,7 @@ axios.defaults.baseURL = import.meta.env.VITE_API_MOVIE_BASE_URL;
 axios.defaults.params = {
   api_key: import.meta.env.VITE_API_MOVIE_KEY,
   language: "es-ES",
+  include_adult: false,
 }
 
 const firebaseConfig = {
